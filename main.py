@@ -202,6 +202,13 @@ while game_running:
                     WIN.blit(confirm, (WIDTH/2,HEIGHT/2))
                     updateScreen()
                    
+                #hint screen required
+                
+                # warning screen
+                
+                #lose screen menu
+                
+                #view high scores screen
 
 
                 
