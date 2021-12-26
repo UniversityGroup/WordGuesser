@@ -188,13 +188,13 @@ while game_running:
                 gameplay_screen = True
                 leaderboard_Screen = False                
 
-            elif(event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT):
+            elif(event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT): #see pygame library for different buttons 
                 welcome_screen = False 
                 gameplay_screen = False
                 leaderboard_Screen = True
                 game_difficulty_screen = False
 
-            elif(event.key == pygame.K_ESCAPE and gameplay_screen == True):
+            elif(event.key == pygame.K_ESCAPE and gameplay_screen == True): #this was the attempt at a quit screen because we did not want the user to accidentally escape the game
                 print(show_warning)
                 show_warning = True
                 if(show_warning):
