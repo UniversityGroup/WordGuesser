@@ -42,6 +42,7 @@ class Input:
         self.missingLetterNumber = self.missingLetterCount()
         
         
+        
 
     #count missing letters
     def missingLetterCount(self):
@@ -120,11 +121,11 @@ class Input:
        
 
     #draw user input
-    def drawuserInput(self):
+    def drawuserInput(self,font, y):
         if(len(self.keys) > 0):
             for key, value in self.keys.items():
-                font = gameplayFont.render(value, True, WHITE)
-                self.window.blit(font, (self.cordinates[key], self.startY))
+                text = font.render(value, True, WHITE)
+                self.window.blit(text, (self.cordinates[key], y))
 
     def nextWord(self, stringArray):
         self.string = stringArray
@@ -146,6 +147,17 @@ class Input:
         for key, value in self.keys.items():
             self.string[key] = value
         return self.string
+
+    #render hint
+    def renderHint(self, hint):
+        hintText = textFont.render(hint, True, WHITE)
+        wordLength = 0
+        for x in hint:
+            wordLength += textFont.size(x)[0]
+        
+
+        self.window.blit(hintText,((WIDTH-wordLength)/2,HEIGHT/1.8))
+        
 
 
 

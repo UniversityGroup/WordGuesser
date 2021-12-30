@@ -11,8 +11,8 @@ XSpacing, YSpacing  = 20, 25
 startX = WIDTH/3
 startY = HEIGHT/3
 #game screens
-welcome_screen = False
-gameplay_screen = True
+welcome_screen = True
+gameplay_screen = False
 leaderboard_Screen = False
 game_difficulty_screen = False
 
@@ -22,6 +22,9 @@ score = 0
 lives = 5
 #difficulty level
 level = "Intermediate"
+
+#show hint
+showHint = False
 
 #enter key
 ENTER_KEY = 13

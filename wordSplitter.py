@@ -29,7 +29,6 @@ def wordSplitter():  #catcatcat1
     line = wordPicker.getWord()
     hint = line[1]
     word = line[0]
-    print(word,hint)
     length = len(word)
     array = list(word)  # [c,a,t,c,a,t,c,a,t,1]
     missing = []
@@ -48,7 +47,7 @@ def wordSplitter():  #catcatcat1
         else:
             missing_word += str(x)
     
-    return result
+    return [result,hint]
 
 
 

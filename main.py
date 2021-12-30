@@ -40,7 +40,8 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Render")
 
 word = wordSplitter()
-input = Input(word[1],WIN,startX,startY)
+input = Input(word[0][1],WIN,startX,startY)
+age = Input(["_","_","_"],WIN, WIDTH/3+150, HEIGHT*0.70)
 
 def updateScreen():
     pygame.display.update()
@@ -81,7 +82,10 @@ def draw():
         gameDifficultyScreen()
     elif(gameplay_screen):
         input.drawWord()
-        input.drawuserInput()
+        input.drawuserInput(gameplayFont,input.startY)
+        
+        if(showHint):
+            input.renderHint(word[1])
 
     updateScreen()
     
@@ -106,14 +110,15 @@ def gameTitle():
         WIN.blit(UESSER, (WIDTH/3+180, HEIGHT/3))
 
 def gameDifficultyScreen():
-    age = textFont.render("How   old   are   you?",True, WHITE)
-    enter = textFont.render("Enter your age ___",True,WHITE)
+    question = textFont.render("How   old   are   you?",True, WHITE)
+    enter = textFont.render("Enter your age",True,WHITE)
     prompt = controlsFont.render("press  ENTER  to  select / BACKPACE to delete / ESC to go back to main screen",True,WHITE)
 
-    WIN.blit(age,(WIDTH/3, HEIGHT*0.65))
+    WIN.blit(question,(WIDTH/3, HEIGHT*0.65))
     WIN.blit(enter,(WIDTH/3, HEIGHT*0.75))
     WIN.blit(prompt, (WIDTH/4, HEIGHT*0.9))
-
+    age.drawWord()
+    age.drawuserInput(textFont, HEIGHT*0.74 )
 
 
 while game_running:
@@ -125,21 +130,31 @@ while game_running:
             pygame.display.quit()
             game_running = False
         elif(event.type == pygame.KEYDOWN):
+            print(event.key)
             #input event
-            if(gameplay_screen and (event.key >= 65 and event.key <= 90) or (event.key >= 97 and event.key <= 122) and (len(input.keys) < input.missingLetterNumber)):
+            if(gameplay_screen and ((event.key >= 65 and event.key <= 90) or (event.key >= 97 and event.key <= 122)) and (len(input.keys) < input.missingLetterNumber)):
                 input.userInput(chr(event.key))
                 input.nextPosition()
                 input.counter +=1
                 if(input.cursorPos < len(input.missingPosition) -1):
                     input.cursorPos += 1
-                    print("main counter",input.counter)
+
+            #get age
+            if(game_difficulty_screen and (event.key >= 48 and event.key <= 57) and (len(age.keys) < age.missingLetterNumber)):
+                age.userInput(chr(event.key))
+                age.nextPosition()
+                age.counter +=1
+                if(age.cursorPos < len(age.missingPosition) -1):
+                    age.cursorPos += 1
+            
+                    
                     
                     
                 
                 
                 
             #next event
-            if(event.key == ENTER_KEY and gameplay_screen):
+            if(event.key == ENTER_KEY and gameplay_screen and (len(input.missingPosition) == len(input.keys))):
                 if(lives > 0):
                     result = input.constructWord()
                     answer = word[0]
@@ -149,7 +164,8 @@ while game_running:
                         lives -= 1
                     #choose next word
                     word = wordSplitter()
-                    input.nextWord(word[1])
+                    input.nextWord(word[0][1])
+                    showHint = False
                 else:
                     gameplay_screen = False
                     welcome_screen = True
@@ -157,52 +173,61 @@ while game_running:
 
             #delete event
             if(event.key == pygame.K_BACKSPACE and gameplay_screen):
-               
                 if(input.cursorPos > 0):
                    input.cursorPos -= 1
-            
                 input.deleteLetter()
+            #age delete event
+            if(event.key == pygame.K_BACKSPACE and game_difficulty_screen):
+                if(age.cursorPos > 0):
+                   age.cursorPos -= 1
+                age.deleteLetter()
 
-            #choose next puzzle
-            if(event.key == ENTER_KEY and (len(input.missingLetters) == len(input.keys))):
-                input.nextWord(word[1])
+            
+
             elif(event.key == pygame.K_ESCAPE and game_difficulty_screen == True):
                 welcome_screen = True 
                 gameplay_screen = False
                 leaderboard_Screen = False
                 game_difficulty_screen = False
 
+            #quit the game if ESC is pressed and in welcome screen
             elif(event.key == pygame.K_ESCAPE and welcome_screen == True):
                 pygame.display.quit()
                 game_running = False
 
+            #go to difficulty selection screen
             elif(event.key == ENTER_KEY and welcome_screen == True):
                 welcome_screen = False
                 game_difficulty_screen = True
                 gameplay_screen = False
                 leaderboard_Screen = True
 
+            #show game play screen 
             elif(event.key == ENTER_KEY and game_difficulty_screen == True ):
                 welcome_screen = False
                 game_difficulty_screen = False
                 gameplay_screen = True
                 leaderboard_Screen = False                
 
-            elif(event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT): #see pygame library for different buttons 
+            #show leader board if shift key is pressed 
+            elif(event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT): 
                 welcome_screen = False 
                 gameplay_screen = False
                 leaderboard_Screen = True
                 game_difficulty_screen = False
 
-            elif(event.key == pygame.K_ESCAPE and gameplay_screen == True): #this was the attempt at a quit screen because we did not want the user to accidentally escape the game
-                print(show_warning)
+            #this was the attempt at a quit screen because we did not want the user to accidentally escape the game
+            elif(event.key == pygame.K_ESCAPE and gameplay_screen == True): 
+                
                 show_warning = True
                 if(show_warning):
                     confirm = gameplayFont.render("Are you sure you want to quit?",True, RED)
                     WIN.blit(confirm, (WIDTH/2,HEIGHT/2))
                     updateScreen()
                    
-                #hint screen required
+            #show hint
+            elif(event.key == pygame.K_TAB and gameplay_screen == True):
+                showHint = True
                 
                 # warning screen
                 
