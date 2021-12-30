@@ -8,6 +8,8 @@ class Score:
         self.maxScoreRecord = 10
         #create sore file if not exist
         self.checkFile()
+        #scores array
+        self.scores = []
 
     #create sore file if not exist
     def checkFile(self):
@@ -21,21 +23,36 @@ class Score:
             scores.write(name+" "+str(score)+"\n")
 
     #check score and write from high to low 
-    def checkScore(self):
-        with open(self.scoreFile,"ra") as scores:
-            lines = scores.readlines()
+    def checkScore(self,name, score):
+        self.clone()
+        with open(self.scoreFile,"r") as file:
+            lines = file.readlines()
+            for index, line in enumerate(lines):
+                value = line.split(" ")[1]
+                player = line.split(" ")[0]
+                if(int(score) > int(value) and (player != name)):
+                    print(player, name)
+                    print("unique")
+                    self.scores.insert(index, str(name)+ " " + str(score)+"\n")
+                    self.writeFile(self.scores)
+                    self.scores = []
+                    return 
     
-    
-s = Score()
-s.saveScore("sam",100)
-s.saveScore("tim",90)
-s.saveScore("jam",80)
-s.saveScore("ram",70)
-s.saveScore("pam",60)
-s.saveScore("aim",50)
-s.saveScore("bam",40)
-s.saveScore("eam",30)
-s.saveScore("uam",20)
-s.saveScore("iim",10)
+    #clone the scores from scores.txt to an array
+    def clone(self):
+        with open(self.scoreFile,"r") as file:
+            lines = file.readlines()
+            for index, line in enumerate(lines):
+                self.scores.insert(index, line)
+
+    #write array to file
+    def writeFile(self, array):
+        with open(self.scoreFile,"w") as file:
+            for x in range(self.maxScoreRecord):
+                print(x)
+                file.write(array[x])
+
+
+
 
 
