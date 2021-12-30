@@ -30,8 +30,7 @@ from animation import *
 from input import Input
 from wordSplitter import wordSplitter
 from score import Score
-from gameUi import *
-
+from ui import Ui
 
 
 
@@ -43,6 +42,8 @@ pygame.display.set_caption("Render")
 word = wordSplitter()
 input = Input(word[0][1],WIN,startX,startY)
 age = Input(["_","_","_"],WIN, WIDTH/3+150, HEIGHT*0.70)
+gameUi = Ui(WIN,age)
+
 
 def updateScreen():
     pygame.display.update()
@@ -75,12 +76,12 @@ def draw():
                 drawingBorder = False
         
     if(not gameplay_screen):
-        gameTitle()
+        gameUi.gameTitle()
     
     if(welcome_screen):
-        welcomeScreen()
+        gameUi.welcomeScreen()
     elif(game_difficulty_screen):
-        gameDifficultyScreen()
+        gameUi.gameDifficultyScreen()
     elif(gameplay_screen):
         input.drawWord()
         input.drawuserInput(gameplayFont,input.startY)
