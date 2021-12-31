@@ -83,7 +83,6 @@ def draw():
     elif(game_difficulty_screen):
         gameUi.gameDifficultyScreen(highlight)
     elif(gameplay_screen):
-        print("main")
         gameUi.gameplayScreen()
         input.drawWord()
         input.drawuserInput(gameplayFont,input.startY)
@@ -128,12 +127,13 @@ while game_running:
             if(event.key == ENTER_KEY and gameplay_screen and (len(input.missingPosition) == len(input.keys))):
                 if(lives > 0):
                     result = input.constructWord()
-                    answer = word[0][1]
-                    print(result,answer)
+                    answer = word[0][0]
                     if(result == answer):
+                        print(result,answer)
                         score += 10
                     else:
                         lives -= 1
+                        
                     print(lives,score)
                     #choose next word
                     

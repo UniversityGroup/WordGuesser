@@ -92,5 +92,5 @@ class Ui:
         def gameplayScreen(self):
                 time=textFont.render("Time :",True, WHITE)
                 self.window.blit(time,(WIDTH*0.5 , HEIGHT- 400))
-                print("working")
+                
                 
