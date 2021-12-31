@@ -11,32 +11,89 @@ class Score:
         #scores array
         self.scores = []
 
-    #create sore file if not exist
+    #create score file if not exist
     def checkFile(self):
         if(not os.path.exists(self.scoreFile)):
             file = open(self.scoreFile, "w")
             file.close()
 
-    #write score to a file
-    def saveScore(self,name,score):
-        with open(self.scoreFile, "a") as scores:
-            scores.write(name+" "+str(score)+"\n")
 
-    #check score and write from high to low 
+    #check score and write from high to low score in  file
     def checkScore(self,name, score):
+        #clone the scores from scores.txt to an array
         self.clone()
+        #player lsit in score file
+        playerList = []
+        #is player found in scores file
+        isFound = False
         with open(self.scoreFile,"r") as file:
             lines = file.readlines()
+            #if no player in score simply save it to file
+            if(len(lines) < 1):
+                self.scores.insert(0, str(name)+ " " + str(score)+"\n")
+                self.writeFile(self.scores)
+                self.scores = []
+                return
+
+            #loop through lines in scores file        
             for index, line in enumerate(lines):
-                value = line.split(" ")[1]
+                #get the score from line
+                playerScore = line.split(" ")[1]
+                #get the player name from line
                 player = line.split(" ")[0]
-                if(int(score) > int(value) and (player != name)):
-                    print(player, name)
-                    print("unique")
-                    self.scores.insert(index, str(name)+ " " + str(score)+"\n")
+                playerList.append(player)
+                cloneIndex = index
+                print("intial clone is ",self.scores)
+                if(name == player):
+                    print("index ", index)
+                    print("player ",name," is in playeList ",playerList)
+                    isFound = True
+                    if(int(score) > int(playerScore)):
+                        self.scores[index] = str(name)+ " " + str(score)+"\n"
+                        for index, line in enumerate(lines):
+                            #get the score from line
+                            playerScore = line.split(" ")[1]
+                            #get the player name from line
+                            player = line.split(" ")[0]
+                            print(playerScore, score)
+                            if(int(score) > int(playerScore)):
+                                print("unique")
+                                self.scores.pop(cloneIndex)
+                                self.scores.insert(index, str(name)+ " " + str(score)+"\n")
+                                print("cloneindex ",cloneIndex)
+                                self.writeFile(self.scores)
+                                self.scores = []
+                                return
+
+
+
+
+                    print("clone is ",self.scores)
                     self.writeFile(self.scores)
                     self.scores = []
-                    return 
+                    isFound = False
+                    return
+            if(not isFound):
+                for index, line in enumerate(lines):
+                    #get the score from line
+                    playerScore = line.split(" ")[1]
+                    #get the player name from line
+                    player = line.split(" ")[0]
+                    print(playerScore, score)
+                    if(int(score) > int(playerScore)):
+                        print("unique")
+                        self.scores.insert(index, str(name)+ " " + str(score)+"\n")
+                        self.writeFile(self.scores)
+                        self.scores = []
+                        return
+                    else:
+                        print("unique2")
+                        self.scores.append(str(name)+ " " + str(score)+"\n")
+                        self.writeFile(self.scores)
+                        self.scores = []
+                        return
+
+            
     
     #clone the scores from scores.txt to an array
     def clone(self):
@@ -47,12 +104,13 @@ class Score:
 
     #write array to file
     def writeFile(self, array):
+        if(len(array) < self.maxScoreRecord):
+            self.maxScoreRecord = len(array)
+        
         with open(self.scoreFile,"w") as file:
             for x in range(self.maxScoreRecord):
                 print(x)
                 file.write(array[x])
 
 
-
-
-
+    

@@ -1,8 +1,7 @@
-100 Words Challenge 
 Beginner :
 my
 hi - shortned word for hello
-go
+go - 
 cab - american word for taxi 
 jab -  
 bat - animal that comes out in the dark
@@ -101,7 +100,6 @@ land - if your not on water, you are on ____
 bear - this animal lives in the woods and is really big 
 foot - we have two of these and its what we stand on 
 Intermediate: 
-also
 area - my local ____ has a shop 
 army - a group of people who fight to protect our country 
 away - when you want to get rid of someone you tell them to go ____
@@ -179,66 +177,60 @@ Stream - When you watch something live
 Writer - People use to use type ______
 Advised - When Borris Johnson makes decisions he is _______
 History - A subject at school 
-However - 
-Kitchen
-Library 
-Listing 
-Morning 
-Opinion 
-Problem 
-Recover 
-Sixteen 
-Tension
-Vehicle 
-Winning 
-Working  
-Accepted 
-Achieved 
-Bathroom
-Building 
-Calendar 
-Capacity 
-Daughter 
-Describe 
-Eighteen 
-Finished 
-Hospital 
-Inspired 
-Location 
-Medicine 
-Notebook
-Operator
-Powerful
-Research 
-Security 
-Simplify 
-Terrible 
-Thinking 
-Violence 
-Wireless
-Yourself 
-Chocolate 
-Christmas 
-Beautiful
-Happiness 
-Adventure 
-Irregular 
-President 
-Adjective 
-Pineapple
-Different 
-Vegetable 
-Invisible 
-Education 
-Beginning 
-Wednesday 
-Breakfast 
-Spaghetti 
-Chemistry 
-Celebrity 
-Breathing  
-Antarctica
-Girlfriend 
-Earthquake
-Concussion
-Instrument 
+However - A connective word
+Kitchen - Where you cook the food 
+Library - Where you read books 
+Listing - When you create a list you are _______
+Morning - The opposite of afternoon 
+Opinion - If you have a belief about something you have a _______
+Problem - When something occurs that is bad it is known as a _______
+Recover - When you have done something hard you need to _______
+Sixteen - Fourteen, Fifteen, ________, Seventeen 
+Tension - When people are not happy there is _______
+Vehicle - What you use to get around 
+Winning - The opposite of losing 
+Working  - What you have to do to earn money 
+Accepted - The opposite of rejected 
+Achieved - When you have done something good and you earn a reward. You have ________ something
+Building - What most houses are 
+Calendar - What you have that tells you many days in the year 
+Capacity - When somewhere is full it is at ________
+Daughter - If yoour not a son then you are a ________
+Describe - When you tell someone about something you ________ it 
+Eighteen - Sixteen, Seventeen, ________, Nineteen
+Finished - The opposite of started
+Hospital - When you are very poorly you go to ________
+Inspired - When someone has told you something good you have ________ them 
+Medicine - When you are poorly this makes you better 
+Notebook - What you write in to make notes 
+Operator - At a theme park this person starts the rides 
+Powerful - If you are not weak thne you are _________
+Research - If you are interested in something you can conduct further ________
+Security - At a concert there are lot's of ________
+Simplify - On the gameshow the CHASE if the game is too hard then you must ________
+Terrible - If something is really bad then it is ________
+Violence - If there is alot of physical fighting then there is a lot of ________
+Wireless -  If something isn't wired then it is ________
+Yourself - When you are selfish you only think about ________
+Chocolate - The opposite of sweets 
+Christmas - What comes on the 25th of December ?
+Beautiful - The opposite of ugly 
+Happiness - The opposite of sadness
+Adventure - If you want to go exploring this is known as an _________
+Irregular - The opposite of regular 
+President - This role is the leader of America 
+Adjective - This type of word describes something 
+Different - If something isn't the same then it is _________
+Vegetable - 'You must eat your fruit and ________'
+Invisible - When someone can't see you, you are _________
+Education - What you must go through to learn new things 
+Beginning - The opposite of the end 
+Wednesday - Monday, Tuesday, _________, Thursday 
+Breakfast - What you eat at the start of the day 
+Chemistry - The three types of science are Biology, Physics and _________
+Celebrity - Ant and Dec host I'm a _________ get me out of here !
+Breathing - You must do this to live 
+Girlfriend - The opposite of a boyfriend 
+Earthquake - When the ground shakes it is known as an __________
+Concussion - What happens when you badly bang your head 
+Instrument - What you play to create music 

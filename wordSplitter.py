@@ -4,14 +4,15 @@ import time
 from variables import level
 from pickWord import PickWord
 
-wordPicker = PickWord(level)
+
+
 
 
 
 def less_Code(length,array,missing):
     already_choosen = []
     original_array = array.copy()
-    missing_length = int(length*0.6)
+    missing_length = int(length*0.5)
     while len(already_choosen) < missing_length:
         random_position = random.randrange(length-1)
         if(random_position not in already_choosen):
@@ -25,7 +26,8 @@ def less_Code(length,array,missing):
 
 
 
-def wordSplitter():  #catcatcat1
+def wordSplitter(level):  #catcatcat1
+    wordPicker = PickWord(level)
     line = wordPicker.getWord()
     hint = line[1]
     word = line[0]
@@ -51,4 +53,4 @@ def wordSplitter():  #catcatcat1
 
 
 
-# wordSplitter() 
+

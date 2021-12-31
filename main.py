@@ -38,12 +38,12 @@ from ui import Ui
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 #Game window title
 pygame.display.set_caption("Render")
+word = None
+input = None
 
-word = wordSplitter()
-input = Input(word[0][1],WIN,startX,startY)
-age = Input(["_","_","_"],WIN, WIDTH/3+150, HEIGHT*0.70)
-gameUi = Ui(WIN,age)
-
+gameUi = Ui(WIN)
+#highlight for level selection 
+highlight = 0
 
 def updateScreen():
     pygame.display.update()
@@ -75,16 +75,19 @@ def draw():
             if(y <= 0):
                 drawingBorder = False
         
-    if(not gameplay_screen):
+    if(welcome_screen):
         gameUi.gameTitle()
     
     if(welcome_screen):
         gameUi.welcomeScreen()
     elif(game_difficulty_screen):
-        gameUi.gameDifficultyScreen()
+        gameUi.gameDifficultyScreen(highlight)
     elif(gameplay_screen):
+        print("main")
+        gameUi.gameplayScreen()
         input.drawWord()
         input.drawuserInput(gameplayFont,input.startY)
+        
         
         if(showHint):
             input.renderHint(word[1])
@@ -102,7 +105,16 @@ while game_running:
             pygame.display.quit()
             game_running = False
         elif(event.type == pygame.KEYDOWN):
-            print(event.key)
+
+            #change highlight for level selection
+            if(event.key == pygame.K_UP):
+                
+                if(highlight > 0):
+                    highlight -= 1
+                
+            elif(event.key == pygame.K_DOWN):
+                if(highlight < 2):
+                    highlight += 1
             #input event
             if(gameplay_screen and ((event.key >= 65 and event.key <= 90) or (event.key >= 97 and event.key <= 122)) and (len(input.keys) < input.missingLetterNumber)):
                 input.userInput(chr(event.key))
@@ -111,51 +123,36 @@ while game_running:
                 if(input.cursorPos < len(input.missingPosition) -1):
                     input.cursorPos += 1
 
-            #get age
-            if(game_difficulty_screen and (event.key >= 48 and event.key <= 57) and (len(age.keys) < age.missingLetterNumber)):
-                age.userInput(chr(event.key))
-                age.nextPosition()
-                age.counter +=1
-                if(age.cursorPos < len(age.missingPosition) -1):
-                    age.cursorPos += 1
-            
-                    
-                    
-                    
-                
-                
                 
             #next event
             if(event.key == ENTER_KEY and gameplay_screen and (len(input.missingPosition) == len(input.keys))):
                 if(lives > 0):
                     result = input.constructWord()
-                    answer = word[0]
+                    answer = word[0][1]
+                    print(result,answer)
                     if(result == answer):
                         score += 10
                     else:
                         lives -= 1
+                    print(lives,score)
                     #choose next word
-                    word = wordSplitter()
+                    
+                    word = wordSplitter(level)
                     input.nextWord(word[0][1])
                     showHint = False
                 else:
                     _score = Score()
-                    _score.saveScore("time",score)
                     _score.checkScore("time",score)
                     gameplay_screen = False
-                    welcome_screen = True
+                    welcome_screen = False
                     game_difficulty_screen = False
-
+                    leaderboard_Screen = True
             #delete event
             if(event.key == pygame.K_BACKSPACE and gameplay_screen):
                 if(input.cursorPos > 0):
                    input.cursorPos -= 1
                 input.deleteLetter()
-            #age delete event
-            if(event.key == pygame.K_BACKSPACE and game_difficulty_screen):
-                if(age.cursorPos > 0):
-                   age.cursorPos -= 1
-                age.deleteLetter()
+            
 
             
 
@@ -182,7 +179,10 @@ while game_running:
                 welcome_screen = False
                 game_difficulty_screen = False
                 gameplay_screen = True
-                leaderboard_Screen = False                
+                leaderboard_Screen = False
+                level = levelList[highlight]
+                word = wordSplitter(level)
+                input = Input(word[0][1],WIN,startX,startY)             
 
             #show leader board if shift key is pressed 
             elif(event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT): 

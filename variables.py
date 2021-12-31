@@ -21,7 +21,8 @@ score = 0
 #player starting life
 lives = 5
 #difficulty level
-level = "Intermediate"
+levelList = ["Beginner","Intermediate","Expert"]
+level = "Beginner"
 
 #show hint
 showHint = False
