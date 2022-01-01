@@ -37,13 +37,17 @@ from ui import Ui
 #Game window
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 #Game window title
-pygame.display.set_caption("Render")
+pygame.display.set_caption("WordGuesser")
 word = None
 input = None
 
 gameUi = Ui(WIN)
 #highlight for level selection 
 highlight = 0
+#highlight for warning screen
+warningHighlight = 0
+#get player name
+name = Input(["_","_","_","_","_","_","_","_","_","_"],WIN,WIDTH*0.2,HEIGHT*0.5)
 
 def updateScreen():
     pygame.display.update()
@@ -83,13 +87,23 @@ def draw():
     elif(game_difficulty_screen):
         gameUi.gameDifficultyScreen(highlight)
     elif(gameplay_screen):
-        gameUi.gameplayScreen()
+        gameUi.gameplayScreen(level,lives,score)
         input.drawWord()
         input.drawuserInput(gameplayFont,input.startY)
-        
-        
+        #show hint
         if(showHint):
             input.renderHint(word[1])
+    elif(leaderboard_Screen):
+        gameUi.leaderboardScreen()
+    elif(game_over_screen):
+        #draw game over screen
+        gameUi.gameOverScreen()
+        #draw the inputbox
+        name.drawWord()
+        #draw user input
+        name.drawuserInput(textFont,HEIGHT*0.5)
+    elif(warning_screen):
+        gameUi.warningScreen(warningHighlight)
 
     updateScreen()
  
@@ -106,14 +120,49 @@ while game_running:
         elif(event.type == pygame.KEYDOWN):
 
             #change highlight for level selection
-            if(event.key == pygame.K_UP):
+            if(event.key == pygame.K_UP and game_difficulty_screen):
                 
                 if(highlight > 0):
                     highlight -= 1
                 
-            elif(event.key == pygame.K_DOWN):
+            elif(event.key == pygame.K_DOWN and game_difficulty_screen):
                 if(highlight < 2):
                     highlight += 1
+
+            
+            #warning screen option selection
+            if(warning_screen and event.key == pygame.K_RIGHT):
+                if(warningHighlight < 1):
+                    warningHighlight += 1
+            elif(warning_screen and event.key == pygame.K_LEFT):
+                if(warningHighlight > 0):
+                    warningHighlight -= 1
+
+            #handle event when enter key is pressed in warning screen
+            if(warning_screen and event.key == ENTER_KEY):
+                if(warningHighlight == 0):
+                    warning_screen = False
+                    gameplay_screen = True
+                elif(warningHighlight == 1):
+                    warning_screen = False
+                    welcome_screen = True
+
+
+            #gameover input event/get playername
+            if(game_over_screen and len(name.keys) < name.missingLetterNumber and ((event.key >= 65 and event.key <= 90) or (event.key >= 97 and event.key <= 122))):
+                name.userInput(chr(event.key))
+                name.nextPosition()
+                print("adding counter")
+                name.counter += 1
+                if(name.cursorPos < len(name.missingPosition) -1):
+                    name.cursorPos += 1
+            if(game_over_screen and event.key == pygame.K_BACKSPACE):
+                if(name.cursorPos > 0):
+                    name.cursorPos -= 1
+                    print("cursor pos ",name.cursorPos)
+                    name.deleteLetter()
+
+            
             #input event
             if(gameplay_screen and ((event.key >= 65 and event.key <= 90) or (event.key >= 97 and event.key <= 122)) and (len(input.keys) < input.missingLetterNumber)):
                 input.userInput(chr(event.key))
@@ -133,8 +182,6 @@ while game_running:
                         score += 10
                     else:
                         lives -= 1
-                        
-                    print(lives,score)
                     #choose next word
                     
                     word = wordSplitter(level)
@@ -146,7 +193,8 @@ while game_running:
                     gameplay_screen = False
                     welcome_screen = False
                     game_difficulty_screen = False
-                    leaderboard_Screen = True
+                    game_over_screen = True
+                    leaderboard_Screen = False
             #delete event
             if(event.key == pygame.K_BACKSPACE and gameplay_screen):
                 if(input.cursorPos > 0):
@@ -193,12 +241,9 @@ while game_running:
 
             #this was the attempt at a quit screen because we did not want the user to accidentally escape the game
             elif(event.key == pygame.K_ESCAPE and gameplay_screen == True): 
+                gameplay_screen = False
+                warning_screen = True
                 
-                show_warning = True
-                if(show_warning):
-                    confirm = gameplayFont.render("Are you sure you want to quit?",True, RED)
-                    WIN.blit(confirm, (WIDTH/2,HEIGHT/2))
-                    updateScreen()
                    
             #show hint
             elif(event.key == pygame.K_TAB and gameplay_screen == True):
@@ -206,9 +251,7 @@ while game_running:
                 
                 # warning screen
                 
-                #lose screen menu
-                
-                #view high scores screen
+           
 
 
                 

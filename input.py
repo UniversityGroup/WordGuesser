@@ -74,7 +74,6 @@ class Input:
         cursor = gameplayFont.render("|", True, WHITE)
         cursor.set_alpha(blink())
         #draw cursor at end of character if there is a letter in current position
-   
         if(self.missingPosition[self.cursorPos] in self.keys):
             self.window.blit(cursor, (self.cordinates[self.missingPosition[self.cursorPos]]+ gameplayFont.size(self.keys[self.missingPosition[self.cursorPos]])[0], self.startY))
         else:
@@ -97,6 +96,8 @@ class Input:
     #delete words when backspace is pressed
     def deleteLetter(self):
         print("counter ",self.counter)
+        print("missingPos ",self.missingPosition)
+        
         if(self.index > 0 and self.counter > 0):
             self.index -= 1
             self.counter -= 1
@@ -105,6 +106,7 @@ class Input:
             print("missingposition ",self.missingPosition)
             print("removing pos", self.missingPosition[self.counter])
             print("keys ", self.keys)
+            print(self.index)
             print("--------------------------------------------------------")
             self.keys.pop(self.missingPosition[self.counter])
             

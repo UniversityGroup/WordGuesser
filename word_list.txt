@@ -1,9 +1,6 @@
-Beginner :
-my
+Easy :
 hi - shortned word for hello
-go - 
 cab - american word for taxi 
-jab -  
 bat - animal that comes out in the dark
 cat - animal that goes meow
 fat - what happens when you eat too much 
@@ -24,7 +21,6 @@ bag - you have this to take your stuff around with you
 lag - when your game freezes
 tag - a game you play as a kid
 wag - what happens when the dog is happy
-ban -
 can - what you can drink out off
 fan - when you are too warm you can turn on a ___
 man - if your not a woman you are a ___
@@ -99,7 +95,7 @@ king - Prince Charles will be the next ____ of England
 land - if your not on water, you are on ____
 bear - this animal lives in the woods and is really big 
 foot - we have two of these and its what we stand on 
-Intermediate: 
+Medium: 
 area - my local ____ has a shop 
 army - a group of people who fight to protect our country 
 away - when you want to get rid of someone you tell them to go ____
@@ -162,13 +158,12 @@ teeth - when you go the dentist they inspect your _____
 train - how you travel fast across the country 
 truth - shall we play the game _____ or dare ?
 video - dont take a photo, take a _____ instead
-Expert:
+Hard:
 Active - if your not lazy then you are ______
 Amount - the ______ comes too £7.45
 Holder - I am a merlin pass ______
 Leaves - what falls on the ground in autumn
 Lesson - " I have a maths ______ first"
-Moment - 
 Moving - "Today I am ______ house"
 Period - Lets watch a ______ drama 
 Police - They keep our streets safe 

@@ -5,11 +5,11 @@ class PickWord:
         self.FILE = "word_list.txt"
         self.level = level
         #word line range for beginner difficuly in word_list file
-        self.beginner = []
+        self.easy = []
         #word line range for intermediate difficuly in word_list file
-        self.intermediate = []
+        self.medium = []
         #word line range for expert difficuly in word_list file
-        self.expert = []
+        self.hard = []
         self.getWordDifficulty()
 
 
@@ -19,39 +19,39 @@ class PickWord:
         count = 1
         with open(self.FILE) as file:
             for line in file.readlines():
-                if("Beginner" in line):
-                    self.beginner.append(count+1)
-                elif("Intermediate" in line):
-                    self.beginner.append(count-1)
-                    self.intermediate.append(count+1)
-                elif("Expert" in line):
-                    self.intermediate.append(count-1)
-                    self.expert.append(count+1)
+                if("Easy" in line):
+                    self.easy.append(count+1)
+                elif("Medium" in line):
+                    self.easy.append(count-1)
+                    self.medium.append(count+1)
+                elif("Hard" in line):
+                    self.medium.append(count-1)
+                    self.hard.append(count+1)
                 count += 1
-            self.expert.append(count-1)
+            self.hard.append(count-1)
 
 
     #pick a random line given a difficulty level
     def getWord(self):
-        if(self.level == "Beginner"):
+        if(self.level == "Easy"):
             #pick a random line form beginner[] range
-            randomLine = random.randint(self.beginner[0],self.beginner[1])
+            randomLine = random.randint(self.easy[0],self.easy[1])
             with open(self.FILE) as file:
                 #split the line where - is
                 result = file.readlines()[randomLine].split("-")
                 #remove any white space and return the result
                 return [result[0].strip(), result[1].strip()]
-        elif(self.level == "Intermediate"):
+        elif(self.level == "Medium"):
             #pick a random line form beginner[] range
-            randomLine = random.randint(self.intermediate[0],self.intermediate[1])
+            randomLine = random.randint(self.medium[0],self.medium[1])
             with open(self.FILE) as file:
                 #split the line where - is
                 result = file.readlines()[randomLine].split("-")
                 #remove any white space and return the result
                 return [result[0].strip(), result[1].strip()]
-        elif(self.level == "Expert"):
+        elif(self.level == "Hard"):
             #pick a random line form beginner[] range
-            randomLine = random.randint(self.expert[0],self.expert[1])
+            randomLine = random.randint(self.hard[0],self.hard[1])
             with open(self.FILE) as file:
                 #split the line where - is
                 result = file.readlines()[randomLine].split("-")

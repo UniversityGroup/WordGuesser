@@ -15,14 +15,16 @@ welcome_screen = True
 gameplay_screen = False
 leaderboard_Screen = False
 game_difficulty_screen = False
+game_over_screen = False
+warning_screen = False
 
 #player score
 score = 0
 #player starting life
 lives = 5
 #difficulty level
-levelList = ["Beginner","Intermediate","Expert"]
-level = "Beginner"
+levelList = ["Easy","Medium","Hard"]
+level = "Easy"
 
 #show hint
 showHint = False
