@@ -87,7 +87,7 @@ def draw():
     elif(game_difficulty_screen):
         gameUi.gameDifficultyScreen(highlight)
     elif(gameplay_screen):
-        gameUi.gameplayScreen(level,lives,score)
+        gameUi.gameplayScreen(level,lives,score,skips)
         input.drawWord()
         input.drawuserInput(gameplayFont,input.startY)
         #show hint
@@ -104,6 +104,8 @@ def draw():
         name.drawuserInput(textFont,HEIGHT*0.5)
     elif(warning_screen):
         gameUi.warningScreen(warningHighlight)
+    elif(show_result):
+        gameUi.showResult(word[0][0],input.constructWord(),level,lives,score)
 
     updateScreen()
  
@@ -165,6 +167,7 @@ while game_running:
             
             #input event
             if(gameplay_screen and ((event.key >= 65 and event.key <= 90) or (event.key >= 97 and event.key <= 122)) and (len(input.keys) < input.missingLetterNumber)):
+
                 input.userInput(chr(event.key))
                 input.nextPosition()
                 input.counter +=1
@@ -172,8 +175,15 @@ while game_running:
                     input.cursorPos += 1
 
                 
-            #next event
+            #next puzzle
             if(event.key == ENTER_KEY and gameplay_screen and (len(input.missingPosition) == len(input.keys))):
+                show_result = True
+                gameplay_screen = False
+                
+            
+            elif(show_result and event.key == ENTER_KEY):
+                show_result = False
+                gameplay_screen = True
                 if(lives > 0):
                     result = input.constructWord()
                     answer = word[0][0]
@@ -195,6 +205,25 @@ while game_running:
                     game_difficulty_screen = False
                     game_over_screen = True
                     leaderboard_Screen = False
+            #skip if \ is pressed
+            elif(gameplay_screen and event.key == pygame.K_BACKSLASH and skips > 0):
+                show_result = False
+                gameplay_screen = True
+                skips -= 1
+                if(lives > 0):
+                    #choose next word
+                    word = wordSplitter(level)
+                    input.nextWord(word[0][1])
+                    showHint = False
+                else:
+                    _score = Score()
+                    _score.checkScore("time",score)
+                    gameplay_screen = False
+                    welcome_screen = False
+                    game_difficulty_screen = False
+                    game_over_screen = True
+                    leaderboard_Screen = False
+
             #delete event
             if(event.key == pygame.K_BACKSPACE and gameplay_screen):
                 if(input.cursorPos > 0):

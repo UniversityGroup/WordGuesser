@@ -10,7 +10,7 @@ from variables import *
 from fonts import *
 from colors import * 
 from animation import *  
-
+from input import Input
 
 class Ui:
         def __init__(self, window):
@@ -114,12 +114,11 @@ class Ui:
                 self.window.blit(nine,(self.cordinates[8]))
                 self.window.blit(ten,(self.cordinates[9]))
 
-        def gameplayScreen(self,level,lives,score):
+        def gameplayScreen(self,level,lives,score,skips):
                 difficulty=textFont.render("Difficulty : "+str(level),True, WHITE)
                 score=textFont.render("Score : "+str(score),True, WHITE)
                 streak=textFont.render("Streak :",True, WHITE)
-                hint=textFont.render("Hint : ",True, WHITE)
-                skip=textFont.render("Press \ to skip ",True, WHITE)
+                skip=textFont.render("Press \ to skip (skips available "+str(skips)+")",True, WHITE)
                 chances=textFont.render("   chances remain: "+str(lives),True, WHITE)
                 missing_line=textFont.render("enter the missing letter ",True, WHITE)
                 
@@ -127,8 +126,7 @@ class Ui:
                 self.window.blit(difficulty,(WIDTH*0.05 , HEIGHT*0.05))
                 self.window.blit(score,(WIDTH*0.75 , HEIGHT*0.05))
                 self.window.blit(streak,(WIDTH*0.75, HEIGHT*0.15))
-                self.window.blit(hint,(WIDTH-1100 , HEIGHT- 200))
-                self.window.blit(skip,(WIDTH*0.4 , HEIGHT*0.9))
+                self.window.blit(skip,(WIDTH*0.3 , HEIGHT*0.9))
                 self.window.blit(chances,(WIDTH*0.3, HEIGHT*0.05))
                 self.window.blit(missing_line,(WIDTH-750 , HEIGHT- 275))
         
@@ -154,6 +152,30 @@ class Ui:
                 self.window.blit(message, (WIDTH*0.15,HEIGHT*0.20))
                 self.window.blit(cancel, (WIDTH*0.35,HEIGHT*0.45))
                 self.window.blit(quit, (WIDTH*0.6,HEIGHT*0.45))
+
+        def showResult(self, answer, word,level,lives,score):
+                answer_string = ""
+                word_string = ""
+                for x in answer:
+                        answer_string += x
+                for x in word:
+                        word_string += x
+
+                text = textFont.render("Actual answer: "+answer_string,True, WHITE)
+                text2 = textFont.render("Your answer: "+word_string,True, WHITE)
+                difficulty=textFont.render("Difficulty : "+str(level),True, WHITE)
+                score=textFont.render("Score : "+str(score),True, WHITE)
+                streak=textFont.render("Streak :",True, WHITE)
+                skip=textFont.render("Press Enter to continue ",True, WHITE)
+                chances=textFont.render("   chances remain: "+str(lives),True, WHITE)
+                self.window.blit(difficulty,(WIDTH*0.05 , HEIGHT*0.05))
+                self.window.blit(score,(WIDTH*0.75 , HEIGHT*0.05))
+                self.window.blit(streak,(WIDTH*0.75, HEIGHT*0.15))
+                self.window.blit(skip,(WIDTH*0.4 , HEIGHT*0.9))
+                self.window.blit(chances,(WIDTH*0.3, HEIGHT*0.05))
+                self.window.blit(text,(WIDTH*0.4,HEIGHT*0.3))
+                self.window.blit(text2, (WIDTH*0.4, HEIGHT*0.5))                
+                
 
 
                 

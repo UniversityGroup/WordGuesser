@@ -17,6 +17,7 @@ leaderboard_Screen = False
 game_difficulty_screen = False
 game_over_screen = False
 warning_screen = False
+show_result = False
 
 #player score
 score = 0
@@ -25,6 +26,8 @@ lives = 5
 #difficulty level
 levelList = ["Easy","Medium","Hard"]
 level = "Easy"
+#skips available to player
+skips = 5
 
 #show hint
 showHint = False

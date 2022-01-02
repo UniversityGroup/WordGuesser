@@ -91,6 +91,7 @@ class Input:
     def nextPosition(self):
         if(self.index < self.length - 1):
             self.index += 1
+
             
 
     #delete words when backspace is pressed
@@ -117,8 +118,8 @@ class Input:
 
     #get and save user input
     def userInput(self, key):
-        if(self.string[self.missingPosition[self.cursorPos]] == "_"):
-            self.keys[self.missingPosition[self.cursorPos]] = key
+        if(self.string[self.missingPosition[self. counter]] == "_"):
+            self.keys[self.missingPosition[self.counter]] = key
         
        
 
@@ -152,7 +153,7 @@ class Input:
 
     #render hint
     def renderHint(self, hint):
-        hintText = textFont.render(hint, True, WHITE)
+        hintText = textFont.render("Hint: "+hint, True, WHITE)
         wordLength = 0
         for x in hint:
             wordLength += textFont.size(x)[0]
