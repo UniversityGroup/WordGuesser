@@ -28,6 +28,12 @@ levelList = ["Easy","Medium","Hard"]
 level = "Easy"
 #skips available to player
 skips = 5
+#sound on
+sound_on = True
+#music on
+music_on = True
+is_music_playing = False
+paused = False
 
 #show hint
 showHint = False

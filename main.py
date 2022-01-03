@@ -10,6 +10,9 @@
 
 import os
 import sys
+
+
+from pygame.mixer import pause
 try:
     import pygame
     import pygame.time
@@ -46,8 +49,15 @@ gameUi = Ui(WIN)
 highlight = 0
 #highlight for warning screen
 warningHighlight = 0
-#get player name
-name = Input(["_","_","_","_","_","_","_","_","_","_"],WIN,WIDTH*0.2,HEIGHT*0.5)
+#Player name input for the game over screen
+name = Input(["_","_","_"],WIN,WIDTH*0.2,HEIGHT*0.5)
+
+#load sound effect
+sound = pygame.mixer.Sound("vgmenuhighlight.wav")
+#load music 
+pygame.mixer.music.load("game_music.mp3")
+
+
 
 def updateScreen():
     pygame.display.update()
@@ -109,17 +119,45 @@ def draw():
 
     updateScreen()
  
-
+    
 
 while game_running:
+    #set Frams per second
     pygame.time.Clock().tick(FPS)
+    #draw objects
     draw()
-    
+    #play music
+    if(music_on and not is_music_playing and not paused):
+        pygame.mixer.music.play(-1)
+        is_music_playing = True
+    elif(not music_on and is_music_playing):
+        pygame.mixer.music.pause()
+        is_music_playing = False
+        paused = True
+    elif(music_on and paused and not is_music_playing):
+        paused = False
+        is_music_playing = True
+        pygame.mixer.music.unpause()
+
+  
     for event in pygame.event.get():
         if(event.type == pygame.QUIT):
             pygame.display.quit()
             game_running = False
         elif(event.type == pygame.KEYDOWN):
+            #play sound
+            if(sound_on):
+                sound.play()
+            
+
+            #toggle sound
+            if(event.key == pygame.K_LCTRL):
+                sound_on = not sound_on
+
+            #toggle music
+            if(event.key == pygame.K_RCTRL):
+                music_on = not music_on
+
 
             #change highlight for level selection
             if(event.key == pygame.K_UP and game_difficulty_screen):
@@ -154,15 +192,15 @@ while game_running:
             if(game_over_screen and len(name.keys) < name.missingLetterNumber and ((event.key >= 65 and event.key <= 90) or (event.key >= 97 and event.key <= 122))):
                 name.userInput(chr(event.key))
                 name.nextPosition()
-                print("adding counter")
                 name.counter += 1
-                if(name.cursorPos < len(name.missingPosition) -1):
+                if(name.cursorPos < len(name.missingPosition)-1):
                     name.cursorPos += 1
             if(game_over_screen and event.key == pygame.K_BACKSPACE):
                 if(name.cursorPos > 0):
                     name.cursorPos -= 1
-                    print("cursor pos ",name.cursorPos)
+                if(name.counter > 0):
                     name.deleteLetter()
+
 
             
             #input event
@@ -192,7 +230,8 @@ while game_running:
                         score += 10
                     else:
                         lives -= 1
-                    #choose next word
+                    
+                    #choose next random word
                     
                     word = wordSplitter(level)
                     input.nextWord(word[0][1])

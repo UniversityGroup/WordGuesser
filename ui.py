@@ -24,8 +24,12 @@ class Ui:
                 controls2 = textFont.render("press  SHIFT   for    leaderboard", True, WHITE)
                 controls2.set_alpha(blink())
                 controls.set_alpha(blink())
+                sound_control = textFont.render("left Ctrl toggle sound", True,WHITE)
+                music_control = textFont.render("right Ctrl toggle music", True,WHITE)
                 self.window.blit(controls, (WIDTH/4,HEIGHT*0.6))
                 self.window.blit(controls2, (WIDTH/4,HEIGHT*0.68))
+                self.window.blit(sound_control,(40 , HEIGHT*0.9))
+                self.window.blit(music_control,(WIDTH*0.75 , HEIGHT*0.9))
                 # pygame.display.update()
                 
 
@@ -57,12 +61,18 @@ class Ui:
                          hard = textFont.render("Hard",True, LIGHT_GREEN)
                 else:
                         hard = textFont.render("Hard",True, WHITE)
+
+                sound_control = textFont.render("left Ctrl toggle sound", True,WHITE)
+                music_control = textFont.render("right Ctrl toggle music", True,WHITE)
+
                 self.window.blit(question,(WIDTH/2.8, HEIGHT*0.15))
                 
-                self.window.blit(prompt, (WIDTH/4, HEIGHT*0.9))
+                self.window.blit(prompt, (WIDTH/4, HEIGHT*0.85))
                 self.window.blit(easy, ((WIDTH/2.2, HEIGHT*0.35)))
                 self.window.blit(medium, ((WIDTH/2.2, HEIGHT*0.45)))
                 self.window.blit(hard, ((WIDTH/2.2, HEIGHT*0.55)))
+                self.window.blit(sound_control,(40 , HEIGHT*0.9))
+                self.window.blit(music_control,(WIDTH*0.75 , HEIGHT*0.9))
 
 
         def leaderboardScreen(self):
@@ -121,6 +131,8 @@ class Ui:
                 skip=textFont.render("Press \ to skip (skips available "+str(skips)+")",True, WHITE)
                 chances=textFont.render("   chances remain: "+str(lives),True, WHITE)
                 missing_line=textFont.render("enter the missing letter ",True, WHITE)
+                sound_control = textFont.render("left Ctrl toggle sound", True,WHITE)
+                music_control = textFont.render("right Ctrl toggle music", True,WHITE)
                 
                 
                 self.window.blit(difficulty,(WIDTH*0.05 , HEIGHT*0.05))
@@ -128,7 +140,10 @@ class Ui:
                 self.window.blit(streak,(WIDTH*0.75, HEIGHT*0.15))
                 self.window.blit(skip,(WIDTH*0.3 , HEIGHT*0.9))
                 self.window.blit(chances,(WIDTH*0.3, HEIGHT*0.05))
-                self.window.blit(missing_line,(WIDTH-750 , HEIGHT- 275))
+                self.window.blit(missing_line,(WIDTH*0.35 , HEIGHT*0.8))
+                self.window.blit(sound_control,(40 , HEIGHT*0.9))
+                self.window.blit(music_control,(WIDTH*0.75 , HEIGHT*0.9))
+
         
 
 
@@ -161,6 +176,14 @@ class Ui:
                 for x in word:
                         word_string += x
 
+                #if guessed correct say its correct answer
+                if(answer_string == word_string):
+                        correct = textFont.render("Correct!",True, LIGHT_GREEN)
+                        self.window.blit(correct, (WIDTH*0.45,HEIGHT*0.3))
+                else:
+                        wrong = textFont.render("Wrong!",True, RED)
+                        self.window.blit(wrong, (WIDTH*0.45,HEIGHT*0.3))
+
                 text = textFont.render("Actual answer: "+answer_string,True, WHITE)
                 text2 = textFont.render("Your answer: "+word_string,True, WHITE)
                 difficulty=textFont.render("Difficulty : "+str(level),True, WHITE)
@@ -173,8 +196,8 @@ class Ui:
                 self.window.blit(streak,(WIDTH*0.75, HEIGHT*0.15))
                 self.window.blit(skip,(WIDTH*0.4 , HEIGHT*0.9))
                 self.window.blit(chances,(WIDTH*0.3, HEIGHT*0.05))
-                self.window.blit(text,(WIDTH*0.4,HEIGHT*0.3))
-                self.window.blit(text2, (WIDTH*0.4, HEIGHT*0.5))                
+                self.window.blit(text,(WIDTH*0.4,HEIGHT*0.45))
+                self.window.blit(text2, (WIDTH*0.4, HEIGHT*0.55))                
                 
 
 

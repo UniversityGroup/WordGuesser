@@ -16,6 +16,7 @@
 #############################################################################################################################################
 
 
+from typing import Counter
 import pygame
 from animation import blink
 from variables import *
@@ -55,8 +56,8 @@ class Input:
 
     #calculate letter cordinates
     def letterCordinates(self):
-        xPos = self.startX
-        spacing = 20
+        xPos = self.center()
+        spacing = 25
         for letter in self.string:
             xPos += gameplayFont.size(letter)[0]+spacing
             self.cordinates.append(xPos)
@@ -96,20 +97,20 @@ class Input:
 
     #delete words when backspace is pressed
     def deleteLetter(self):
-        print("counter ",self.counter)
-        print("missingPos ",self.missingPosition)
-        
-        if(self.index > 0 and self.counter > 0):
+        print("index, counter ", self.index, self.counter)
+        if(self.index > 0):
             self.index -= 1
+        if(self.counter > 0):
             self.counter -= 1
-            print("#######################################################")
-            print("current counter ",self.counter)
-            print("missingposition ",self.missingPosition)
-            print("removing pos", self.missingPosition[self.counter])
-            print("keys ", self.keys)
-            print(self.index)
-            print("--------------------------------------------------------")
+            # print("#######################################################")
+            # print("current counter ",self.counter)
+            # print("missingposition ",self.missingPosition)
+            # print("removing pos", self.missingPosition[self.counter])
+            # print("keys ", self.keys)
+            # print(self.index)
+            # print("--------------------------------------------------------")
             self.keys.pop(self.missingPosition[self.counter])
+        print("after ", self.index, self.counter)
             
         
         
@@ -160,6 +161,15 @@ class Input:
         
 
         self.window.blit(hintText,((WIDTH-wordLength)/2,HEIGHT/1.8))
+
+    #calculate where the text gonna be in center
+    def center(self):
+        x = 0
+        for letter in self.string:
+            x += gameplayFont.size(letter)[0]
+        print(x)
+
+        return (WIDTH - x)/2
         
 
 
