@@ -33,6 +33,9 @@ def wordSplitter(level):  #catcatcat1
     word = line[0]
     length = len(word)
     array = list(word)  # [c,a,t,c,a,t,c,a,t,1]
+    #capitalize first letter
+    array[0] = array[0].upper()
+    print(array)
     missing = []
     result = []
     missing_word = ""

@@ -225,6 +225,9 @@ while game_running:
                 if(lives > 0):
                     result = input.constructWord()
                     answer = word[0][0]
+                    result[0] = result[0].upper()
+                    answer[0] = answer[0].upper()
+                    print("###############",answer,result)
                     if(result == answer):
                         print(result,answer)
                         score += 10

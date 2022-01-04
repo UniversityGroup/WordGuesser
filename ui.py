@@ -177,7 +177,7 @@ class Ui:
                         word_string += x
 
                 #if guessed correct say its correct answer
-                if(answer_string == word_string):
+                if(answer_string.lower() == word_string.lower()):
                         correct = textFont.render("Correct!",True, LIGHT_GREEN)
                         self.window.blit(correct, (WIDTH*0.45,HEIGHT*0.3))
                 else:
