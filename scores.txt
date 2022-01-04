@@ -1,10 +1,3 @@
-tim 300
-sim 200
-sam 100
-ham 90
-tam 80
-pam 70
-ram 60
-jam 50
-mam 40
-lam 30
+___ 30
+time 10
+sam 10

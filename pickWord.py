@@ -29,6 +29,7 @@ class PickWord:
                     self.hard.append(count+1)
                 count += 1
             self.hard.append(count-1)
+        print(self.easy,self.medium,self.hard)
 
 
     #pick a random line given a difficulty level
@@ -57,6 +58,8 @@ class PickWord:
                 result = file.readlines()[randomLine].split("-")
                 #remove any white space and return the result
                 return [result[0].strip(), result[1].strip()]
+
+        
 
 
 

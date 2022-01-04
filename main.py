@@ -107,7 +107,7 @@ def draw():
         gameUi.leaderboardScreen()
     elif(game_over_screen):
         #draw game over screen
-        gameUi.gameOverScreen()
+        gameUi.gameOverScreen(score)
         #draw the inputbox
         name.drawWord()
         #draw user input
@@ -222,7 +222,7 @@ while game_running:
             elif(show_result and event.key == ENTER_KEY):
                 show_result = False
                 gameplay_screen = True
-                if(lives > 0):
+                if(lives > 1):
                     result = input.constructWord()
                     answer = word[0][0]
                     result[0] = result[0].upper()
@@ -240,13 +240,22 @@ while game_running:
                     input.nextWord(word[0][1])
                     showHint = False
                 else:
-                    _score = Score()
-                    _score.checkScore("time",score)
                     gameplay_screen = False
                     welcome_screen = False
                     game_difficulty_screen = False
                     game_over_screen = True
                     leaderboard_Screen = False
+                    #if game overscreen and name was entered save score
+                    
+            if(game_over_screen and event.key == ENTER_KEY):
+                #only save if name is entered
+                if(len(name.constructString()) > 0):
+                    print(name.constructString())
+                    _score = Score()
+                    _score.checkScore(name.constructString(),score)
+                    # game_over_screen = False
+                    # leaderboard_Screen = True
+                        
             #skip if \ is pressed
             elif(gameplay_screen and event.key == pygame.K_BACKSLASH and skips > 0):
                 show_result = False
@@ -304,7 +313,7 @@ while game_running:
                 input = Input(word[0][1],WIN,startX,startY)             
 
             #show leader board if shift key is pressed 
-            elif(event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT): 
+            elif((event.key == pygame.K_RSHIFT or event.key == pygame.K_LSHIFT) and welcome_screen): 
                 welcome_screen = False 
                 gameplay_screen = False
                 leaderboard_Screen = True
@@ -320,7 +329,10 @@ while game_running:
             elif(event.key == pygame.K_TAB and gameplay_screen == True):
                 showHint = True
                 
-                # warning screen
+            
+            elif(leaderboard_Screen and event.key == pygame.K_ESCAPE):
+                leaderboard_Screen = False
+                welcome_screen = True
                 
            
 

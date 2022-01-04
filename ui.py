@@ -147,7 +147,7 @@ class Ui:
         
 
 
-        def gameOverScreen(self):
+        def gameOverScreen(self,score):
                 message = textFont.render("Your score: "+str(score),True,WHITE)
                 message2 = textFont.render("To save your score enter your name",True,WHITE)
                 self.window.blit(message,(WIDTH/2.5,HEIGHT*0.2))

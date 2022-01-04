@@ -146,11 +146,19 @@ class Input:
         self.firstCursor()
         self.missingLetterNumber = self.missingLetterCount()
 
-    #add the user input with self.string to create a result   
+    #add the user input with self.string to create a result array   
     def constructWord(self):
         for key, value in self.keys.items():
             self.string[key] = value
         return self.string
+
+    #create a user input string
+    def constructString(self):
+        self.constructWord()
+        result = ""
+        for x in self.string:
+            result += x
+        return result
 
     #render hint
     def renderHint(self, hint):
