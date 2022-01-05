@@ -1,3 +1,17 @@
+###########################################By SyntaxError####################################################################################################
+# Author: Korban                                                                                                                                            #
+#  This file picks a random word from a word list file, depending on a difficulty level                                                                     #
+#  functions:                                                                                                                                               #
+#           getWordDifficulty - gets a range of lines number of each difficulty level for example: easy difficulty words lies between line [2,97]           #
+#           getWord           - pick a random number in a given range and pick a line.                                                                      #
+#                                                                                                                                                           #
+#                                                                                                                                                           #
+#                                                                                                                                                           #
+#                                                                                                                                                           #
+#                                                                                                                                                           #
+#############################################################################################################################################################
+
+
 import random
 
 class PickWord:
@@ -40,17 +54,13 @@ class PickWord:
             with open(self.FILE) as file:
                 #split the line where - is
                 result = file.readlines()[randomLine]
-                print("random line ",randomLine)
-                print("random line result ",result)
                 result = result.split("-")
-                print("this line is ", str(result))
                 
                 #remove any white space and return the result
                 return [result[0].strip(), result[1].strip()]
         elif(self.level == "Medium"):
             #pick a random line form beginner[] range
             randomLine = random.randint(self.medium[0]-1,self.medium[1]-1)
-            print("medium, picking line: ",randomLine)
             with open(self.FILE) as file:
                 #split the line where - is
                 result = file.readlines()[randomLine].split("-")
@@ -62,6 +72,7 @@ class PickWord:
             with open(self.FILE) as file:
                 #split the line where - is
                 result = file.readlines()[randomLine].split("-")
+                print(result[0])
                 #remove any white space and return the result
                 return [result[0].strip(), result[1].strip()]
 

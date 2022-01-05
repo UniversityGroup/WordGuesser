@@ -1,8 +1,16 @@
-#########################################################################################################
-# This file contains ui screen of the game
-#
-#
-#
+###########################################By SyntaxError####################################################################################################
+# Author: Ethan Ivey                                                                                                                                            #
+#  This file contains different user interfaces for the game                                                                     #
+#  functions:                                                                                                                                               #
+#           welcomeScreen - gets a range of lines number of each difficulty level for example: easy difficulty words lies between line [2,97]           #
+#           gameTitle           - pick a random number in a given range and pick a line.                                                                      #
+#           gameDifficultyScreen                                                                                                                                                #
+#           leaderboardScreen
+#           gameplayScreen                                                                                                                                                #
+#           gameOverScreen                                                                                                                                                #
+#           warningScreen                                                                                                                                                       #
+#           showResult                                                                                                                                                #
+#############################################################################################################################################################
 
 
 import pygame

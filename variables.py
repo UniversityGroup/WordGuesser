@@ -20,7 +20,7 @@ warning_screen = False
 show_result = False
 
 #player score
-score = 800
+score =250
 #player starting life
 lives = 5
 #difficulty level
