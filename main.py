@@ -50,7 +50,7 @@ highlight = 0
 #highlight for warning screen
 warningHighlight = 0
 #Player name input for the game over screen
-name = Input(["_","_","_"],WIN,WIDTH*0.2,HEIGHT*0.5)
+name = Input(["_","_","_","_","_","_","_","_"],WIN,WIDTH*0.2,HEIGHT*0.5)
 
 #load sound effect
 sound = pygame.mixer.Sound("vgmenuhighlight.wav")
@@ -97,7 +97,7 @@ def draw():
     elif(game_difficulty_screen):
         gameUi.gameDifficultyScreen(highlight)
     elif(gameplay_screen):
-        gameUi.gameplayScreen(level,lives,score,skips)
+        gameUi.gameplayScreen(level,lives,score,skips,availableHints,streak)
         input.drawWord()
         input.drawuserInput(gameplayFont,input.startY)
         #show hint
@@ -115,7 +115,7 @@ def draw():
     elif(warning_screen):
         gameUi.warningScreen(warningHighlight)
     elif(show_result):
-        gameUi.showResult(word[0][0],input.constructWord(),level,lives,score)
+        gameUi.showResult(word[0][0],input.constructWord(),level,lives,score,streak)
 
     updateScreen()
  
@@ -227,12 +227,13 @@ while game_running:
                     answer = word[0][0]
                     result[0] = result[0].upper()
                     answer[0] = answer[0].upper()
-                    print("###############",answer,result)
                     if(result == answer):
-                        print(result,answer)
-                        score += 10
+                        score += 10*streak
+                        if(streak <= 2):
+                            streak += 0.10
                     else:
                         lives -= 1
+                        streak = 1
                     
                     #choose next random word
                     
@@ -246,11 +247,10 @@ while game_running:
                     game_over_screen = True
                     leaderboard_Screen = False
                     #if game overscreen and name was entered save score
-                    
+
             if(game_over_screen and event.key == ENTER_KEY):
                 #only save if name is entered
                 if(len(name.constructString()) > 0):
-                    print(name.constructString())
                     _score = Score()
                     _score.checkScore(name.constructString(),score)
                     # game_over_screen = False
@@ -283,7 +283,7 @@ while game_running:
             
 
             
-
+            #return to welcome screen if esacpe key is pressed and on game difficulty choosing screen
             elif(event.key == pygame.K_ESCAPE and game_difficulty_screen == True):
                 welcome_screen = True 
                 gameplay_screen = False
@@ -319,17 +319,25 @@ while game_running:
                 leaderboard_Screen = True
                 game_difficulty_screen = False
 
-            #this was the attempt at a quit screen because we did not want the user to accidentally escape the game
+            #if player playing the game and wated to quit show warning screen
             elif(event.key == pygame.K_ESCAPE and gameplay_screen == True): 
                 gameplay_screen = False
                 warning_screen = True
-                
+                #reset the stats
+                score = 0
+                lives = 5
+                availableHints = 5
+                skips = 5
+                streak = 1
+                showHint = False
                    
             #show hint
-            elif(event.key == pygame.K_TAB and gameplay_screen == True):
-                showHint = True
+            elif(event.key == pygame.K_TAB and gameplay_screen == True and not showHint):
+                if(availableHints > 0):
+                    showHint = True
+                    availableHints -= 1
                 
-            
+            #return to welcome screen when escape is pressed and on leaderboard screen
             elif(leaderboard_Screen and event.key == pygame.K_ESCAPE):
                 leaderboard_Screen = False
                 welcome_screen = True

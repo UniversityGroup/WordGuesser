@@ -1,4 +1,5 @@
 import os
+from math import floor
 
 class Score:
     def __init__(self):
@@ -48,7 +49,7 @@ class Score:
                     print("index ", index)
                     print("player ",name," is in playeList ",playerList)
                     isFound = True
-                    if(int(score) > int(playerScore)):
+                    if(float(score) > float(playerScore)):
                         self.scores[index] = str(name)+ " " + str(score)+"\n"
                         for index, line in enumerate(lines):
                             #get the score from line
@@ -56,7 +57,7 @@ class Score:
                             #get the player name from line
                             player = line.split(" ")[0]
                             print(playerScore, score)
-                            if(int(score) > int(playerScore)):
+                            if(float(score) > float(playerScore)):
                                 print("unique")
                                 self.scores.pop(cloneIndex)
                                 self.scores.insert(index, str(name)+ " " + str(score)+"\n")
@@ -80,7 +81,7 @@ class Score:
                     #get the player name from line
                     player = line.split(" ")[0]
                     print(playerScore, score)
-                    if(int(score) > int(playerScore)):
+                    if(float(score) > float(playerScore)):
                         print("unique")
                         self.scores.insert(index, str(name)+ " " + str(score)+"\n")
                         self.writeFile(self.scores)

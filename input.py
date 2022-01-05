@@ -97,20 +97,11 @@ class Input:
 
     #delete words when backspace is pressed
     def deleteLetter(self):
-        print("index, counter ", self.index, self.counter)
         if(self.index > 0):
             self.index -= 1
         if(self.counter > 0):
             self.counter -= 1
-            # print("#######################################################")
-            # print("current counter ",self.counter)
-            # print("missingposition ",self.missingPosition)
-            # print("removing pos", self.missingPosition[self.counter])
-            # print("keys ", self.keys)
-            # print(self.index)
-            # print("--------------------------------------------------------")
             self.keys.pop(self.missingPosition[self.counter])
-        print("after ", self.index, self.counter)
             
         
         
@@ -157,7 +148,8 @@ class Input:
         self.constructWord()
         result = ""
         for x in self.string:
-            result += x
+            if(x != "_"):
+                result += x
         return result
 
     #render hint
@@ -174,10 +166,8 @@ class Input:
     def center(self):
         x = 0
         for letter in self.string:
-            x += gameplayFont.size(letter)[0]
-        print(x)
-
-        return (WIDTH - x)/2
+            x += gameplayFont.size(letter)[0] 
+        return (WIDTH - x)/2.5
         
 
 

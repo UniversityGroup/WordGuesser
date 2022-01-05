@@ -124,26 +124,29 @@ class Ui:
                 self.window.blit(nine,(self.cordinates[8]))
                 self.window.blit(ten,(self.cordinates[9]))
 
-        def gameplayScreen(self,level,lives,score,skips):
+        def gameplayScreen(self,level,lives,score,skips,availableHints,streak):
                 difficulty=textFont.render("Difficulty : "+str(level),True, WHITE)
                 score=textFont.render("Score : "+str(score),True, WHITE)
-                streak=textFont.render("Streak :",True, WHITE)
+                streak=textFont.render("Streak : "+str(streak)[:3],True, WHITE)
                 skip=textFont.render("Press \ to skip (skips available "+str(skips)+")",True, WHITE)
                 chances=textFont.render("   chances remain: "+str(lives),True, WHITE)
                 missing_line=textFont.render("enter the missing letter ",True, WHITE)
                 sound_control = textFont.render("left Ctrl toggle sound", True,WHITE)
                 music_control = textFont.render("right Ctrl toggle music", True,WHITE)
+                hint_available = textFont.render("Press TAB to show hints",True,WHITE)
+                hints = textFont.render("Hints available: "+str(availableHints),True,WHITE)
                 
                 
                 self.window.blit(difficulty,(WIDTH*0.05 , HEIGHT*0.05))
                 self.window.blit(score,(WIDTH*0.75 , HEIGHT*0.05))
                 self.window.blit(streak,(WIDTH*0.75, HEIGHT*0.15))
                 self.window.blit(skip,(WIDTH*0.3 , HEIGHT*0.9))
-                self.window.blit(chances,(WIDTH*0.3, HEIGHT*0.05))
+                self.window.blit(chances,(WIDTH*0.4, HEIGHT*0.05))
                 self.window.blit(missing_line,(WIDTH*0.35 , HEIGHT*0.8))
                 self.window.blit(sound_control,(40 , HEIGHT*0.9))
                 self.window.blit(music_control,(WIDTH*0.75 , HEIGHT*0.9))
-
+                self.window.blit(hint_available,(WIDTH*0.35 , HEIGHT*0.7))
+                self.window.blit(hints,(WIDTH*0.05 , HEIGHT*0.15))
         
 
 
@@ -168,7 +171,7 @@ class Ui:
                 self.window.blit(cancel, (WIDTH*0.35,HEIGHT*0.45))
                 self.window.blit(quit, (WIDTH*0.6,HEIGHT*0.45))
 
-        def showResult(self, answer, word,level,lives,score):
+        def showResult(self, answer, word,level,lives,score,streak):
                 answer_string = ""
                 word_string = ""
                 for x in answer:
@@ -188,7 +191,7 @@ class Ui:
                 text2 = textFont.render("Your answer: "+word_string,True, WHITE)
                 difficulty=textFont.render("Difficulty : "+str(level),True, WHITE)
                 score=textFont.render("Score : "+str(score),True, WHITE)
-                streak=textFont.render("Streak :",True, WHITE)
+                streak=textFont.render("Streak : " +str(streak)[:3],True, WHITE)
                 skip=textFont.render("Press Enter to continue ",True, WHITE)
                 chances=textFont.render("   chances remain: "+str(lives),True, WHITE)
                 self.window.blit(difficulty,(WIDTH*0.05 , HEIGHT*0.05))

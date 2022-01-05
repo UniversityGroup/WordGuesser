@@ -29,22 +29,28 @@ class PickWord:
                     self.hard.append(count+1)
                 count += 1
             self.hard.append(count-1)
-        print(self.easy,self.medium,self.hard)
+
 
 
     #pick a random line given a difficulty level
     def getWord(self):
         if(self.level == "Easy"):
             #pick a random line form beginner[] range
-            randomLine = random.randint(self.easy[0],self.easy[1])
+            randomLine = random.randint(self.easy[0]-1,self.easy[1]-1)
             with open(self.FILE) as file:
                 #split the line where - is
-                result = file.readlines()[randomLine].split("-")
+                result = file.readlines()[randomLine]
+                print("random line ",randomLine)
+                print("random line result ",result)
+                result = result.split("-")
+                print("this line is ", str(result))
+                
                 #remove any white space and return the result
                 return [result[0].strip(), result[1].strip()]
         elif(self.level == "Medium"):
             #pick a random line form beginner[] range
-            randomLine = random.randint(self.medium[0],self.medium[1])
+            randomLine = random.randint(self.medium[0]-1,self.medium[1]-1)
+            print("medium, picking line: ",randomLine)
             with open(self.FILE) as file:
                 #split the line where - is
                 result = file.readlines()[randomLine].split("-")
@@ -52,7 +58,7 @@ class PickWord:
                 return [result[0].strip(), result[1].strip()]
         elif(self.level == "Hard"):
             #pick a random line form beginner[] range
-            randomLine = random.randint(self.hard[0],self.hard[1])
+            randomLine = random.randint(self.hard[0]-1,self.hard[1]-1)
             with open(self.FILE) as file:
                 #split the line where - is
                 result = file.readlines()[randomLine].split("-")
