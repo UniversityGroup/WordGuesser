@@ -1,3 +1,11 @@
+#########################################################By SyntaxError##################################################
+# Author: Nathan Sim (24532606) 
+# This File contains functions to create a puzzle word
+# functions:
+#
+#
+
+
 #assume you have a word
 import random
 import time
