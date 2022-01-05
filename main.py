@@ -1,9 +1,9 @@
 ######################################by SyntaxError#########################################################################################
 #  Main file - program starting                                                                                                             #
 #  Functions: Creates a window to display, install pygame if not present, Drawing into the display 
-#  Ben Kelly - 21665613
-#                                                                                                                                           #
-#  Sandip Pradhan -  24899810                                                                                                               #                                                         
+#  Author: Ben Kelly - 21665613
+#  Author: Sandip Pradhan -  24899810                                                                                                                                            #
+#                                                                                                              #                                                         
 #                                                                                                                                           #
 #                                                                                                                                           #
 #############################################################################################################################################
