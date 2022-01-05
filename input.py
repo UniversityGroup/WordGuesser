@@ -1,4 +1,5 @@
 ######################################by SyntaxError#########################################################################################
+#  Author: Sandip Pradhan (24899810)
 #  Input sytem - recoreds user inputs, draws cursor at screen, draw text into screen, compares the result and answer                        #
 #  Functions:                                                                                                                               #
 #               missingLetterCount - calculates number of letter missing from puzzle,                                                       #
