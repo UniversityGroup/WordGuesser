@@ -1,5 +1,5 @@
 ###########################################By SyntaxError####################################################################################################
-# Author: Korban                                                                                                                                            #
+# Author: Korban - 24967131                                                                                                                                 #
 #  This file picks a random word from a word list file, depending on a difficulty level                                                                     #
 #  functions:                                                                                                                                               #
 #           getWordDifficulty - gets a range of lines number of each difficulty level for example: easy difficulty words lies between line [2,97]           #
