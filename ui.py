@@ -1,5 +1,6 @@
 ###########################################By SyntaxError####################################################################################################
-# Author: Ethan Ivey                                                                                                                                            #
+# Author: Ethan Ivey
+# Author: Ben Kelly
 #  This file contains different user interfaces for the game                                                                     #
 #  functions:                                                                                                                                               #
 #           welcomeScreen - gets a range of lines number of each difficulty level for example: easy difficulty words lies between line [2,97]           #
