@@ -12,10 +12,11 @@ import os
 import sys
 
 
-from pygame.mixer import pause
+
 try:
     import pygame
     import pygame.time
+    from pygame.mixer import pause
 except:
     print("Pygame not installed Trying to install pygame.....")
     if(sys.platform == "linux" or sys.platform == "darwin"):
@@ -253,8 +254,8 @@ while game_running:
                 if(len(name.constructString()) > 0):
                     _score = Score()
                     _score.checkScore(name.constructString(),score)
-                    # game_over_screen = False
-                    # leaderboard_Screen = True
+                    game_over_screen = False
+                    leaderboard_Screen = True
                         
             #skip if \ is pressed
             elif(gameplay_screen and event.key == pygame.K_BACKSLASH and skips > 0):

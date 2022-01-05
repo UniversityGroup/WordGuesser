@@ -45,10 +45,12 @@ class Score:
                 playerList.append(player)
                 cloneIndex = index
                 print("intial clone is ",self.scores)
+                #if player exist
                 if(name == player):
                     print("index ", index)
                     print("player ",name," is in playeList ",playerList)
                     isFound = True
+                    #only save score if it higher than last score
                     if(float(score) > float(playerScore)):
                         self.scores[index] = str(name)+ " " + str(score)+"\n"
                         for index, line in enumerate(lines):
@@ -56,25 +58,21 @@ class Score:
                             playerScore = line.split(" ")[1]
                             #get the player name from line
                             player = line.split(" ")[0]
-                            print(playerScore, score)
                             if(float(score) > float(playerScore)):
-                                print("unique")
                                 self.scores.pop(cloneIndex)
                                 self.scores.insert(index, str(name)+ " " + str(score)+"\n")
-                                print("cloneindex ",cloneIndex)
                                 self.writeFile(self.scores)
                                 self.scores = []
                                 return
 
-
-
-
-                    print("clone is ",self.scores)
                     self.writeFile(self.scores)
                     self.scores = []
                     isFound = False
                     return
+            #if new player
             if(not isFound):
+                print("11111111")
+                #if the score is higher than any existing score append at top
                 for index, line in enumerate(lines):
                     #get the score from line
                     playerScore = line.split(" ")[1]
@@ -87,12 +85,24 @@ class Score:
                         self.writeFile(self.scores)
                         self.scores = []
                         return
-                    else:
+                        
+            if(not isFound):
+                print("222222222")     
+                #if the score is not higher than any existing code append at bottom
+                for index, line in enumerate(lines):
+                    #get the score from line
+                    playerScore = line.split(" ")[1]
+                    #get the player name from line
+                    player = line.split(" ")[0]
+                    print(playerScore, score)
+                    if(float(score) > float(playerScore)):
                         print("unique2")
                         self.scores.append(str(name)+ " " + str(score)+"\n")
                         self.writeFile(self.scores)
                         self.scores = []
                         return
+                    
+                        
 
             
     
