@@ -93,7 +93,7 @@ class Ui:
                                 if(i < 5):
                                         self.cordinates.append([WIDTH-x,HEIGHT-y])
                                         y -= 75
-                                        print(y)
+                        
                                 else:
                                         x = 500
                                         self.cordinates.append([WIDTH-x,HEIGHT-y2])
@@ -119,6 +119,7 @@ class Ui:
                 eight=textFont.render("8.  ____________",True, WHITE)
                 nine=textFont.render("9.  ____________",True, WHITE)
                 ten=textFont.render("10.  ____________",True, WHITE)
+                esc = textFont.render("ESC - main menu",True, WHITE)
                 
                 
                 self.window.blit(highscores,(WIDTH-900, HEIGHT- 600))
@@ -132,6 +133,7 @@ class Ui:
                 self.window.blit(eight,(self.cordinates[7]))
                 self.window.blit(nine,(self.cordinates[8]))
                 self.window.blit(ten,(self.cordinates[9]))
+                self.window.blit(esc,(100, HEIGHT*0.05))
 
         def gameplayScreen(self,level,lives,score,skips,availableHints,streak):
                 difficulty=textFont.render("Difficulty : "+str(level),True, WHITE)
@@ -144,7 +146,7 @@ class Ui:
                 music_control = textFont.render("right Ctrl toggle music", True,WHITE)
                 hint_available = textFont.render("Press TAB to show hints",True,WHITE)
                 hints = textFont.render("Hints available: "+str(availableHints),True,WHITE)
-                
+                enter = textFont.render("press Enter to submit",True,WHITE)
                 
                 self.window.blit(difficulty,(WIDTH*0.05 , HEIGHT*0.05))
                 self.window.blit(score,(WIDTH*0.75 , HEIGHT*0.05))
@@ -156,6 +158,7 @@ class Ui:
                 self.window.blit(music_control,(WIDTH*0.75 , HEIGHT*0.9))
                 self.window.blit(hint_available,(WIDTH*0.35 , HEIGHT*0.7))
                 self.window.blit(hints,(WIDTH*0.05 , HEIGHT*0.15))
+                self.window.blit(enter, (WIDTH*0.4,HEIGHT*0.15))
         
 
 

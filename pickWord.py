@@ -72,7 +72,6 @@ class PickWord:
             with open(self.FILE) as file:
                 #split the line where - is
                 result = file.readlines()[randomLine].split("-")
-                print(result[0])
                 #remove any white space and return the result
                 return [result[0].strip(), result[1].strip()]
 

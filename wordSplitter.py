@@ -17,7 +17,7 @@ from pickWord import PickWord
 
 
 
-def less_Code(length,array,missing):
+def missingLetters(length,array,missing):
     already_choosen = []
     original_array = array.copy()
     missing_length = int(length*0.5)
@@ -43,16 +43,15 @@ def wordSplitter(level):  #catcatcat1
     array = list(word)  # [c,a,t,c,a,t,c,a,t,1]
     #capitalize first letter
     array[0] = array[0].upper()
-    print(array)
     missing = []
     result = []
     missing_word = ""
     for x in range(length):
         missing.append("_")
     if length <= 10:
-        result = less_Code(length,array,missing)
+        result = missingLetters(length,array,missing)
     else:
-        result = less_Code(length,array,missing) # makes the code work if it's not exactly 10 letters
+        result = missingLetters(length,array,missing) # makes the code work if it's not exactly 10 letters
 
     for x in result:
         if x == 0:

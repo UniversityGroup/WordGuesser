@@ -30,21 +30,21 @@ def colorShift(color):
 def onOff():
     global alpha
     global current_second
-    # print(alpha)
+
     if(alpha == 255 and int(time.time() - current_second) >= 3):
         alpha = 0
-        # print("0: "+str(time.time() - current_second))
+  
         current_second = time.time()
         
         return 0
     elif(alpha == 0 and int(time.time() - current_second) >= 3):
         alpha = 255
-        # print("255: "+str(time.time() - current_second))
+
         current_second = time.time()
         return 255
     
 
-onOff()
+
     
     
     

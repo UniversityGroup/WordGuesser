@@ -17,16 +17,16 @@ XSpacing, YSpacing  = 20, 25
 startX = WIDTH/3
 startY = HEIGHT/3
 #game screens
-welcome_screen = False
+welcome_screen = True
 gameplay_screen = False
 leaderboard_Screen = False
 game_difficulty_screen = False
-game_over_screen = True
+game_over_screen = False
 warning_screen = False
 show_result = False
 
 #player score
-score =250
+score = 0
 #player starting life
 lives = 5
 #difficulty level
